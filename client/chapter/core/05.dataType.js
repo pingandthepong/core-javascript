@@ -61,9 +61,32 @@ console.log(typeof fuc);
 // 언어 상, 오류 : null이 object로 뜨는 문제
 
 // Object
+// 객체 리터럴 방식
+const user = {
+  name: "tiger",
+  age: 27,
+};
+
+console.log(user.name);
+console.log(user.age);
 
 // Array
+// 배열 리터럴 방식
+let list = [10, 100, 1000, 1, 2, 3];
 
-// function
+// function 함수 = 상자 안의 셈수
+function sum(a, b) {
+  return a + b;
+}
+
+console.log(sum(3, 7));
+
+// 어떤 붕어빵 좋아하세요?
+function carpBread(data) {
+  return `${data} 맛 붕어빵입니다.`;
+}
+console.log(carpBread("팥"));
+console.log(carpBread("크림"));
+console.log(carpBread("민트"));
 
 // this
