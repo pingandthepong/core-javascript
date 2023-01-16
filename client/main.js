@@ -91,8 +91,8 @@ function inputHandler() {
   let secondValue = +getInputValue(secondInput);
   let total = sum(firstValue, secondValue);
 
-  clearContents(result);
-  insertLast(result, total);
+  clearContents(result); // result 안 하이픈 제거
+  insertLast(result, total); // result의 마지막 요소에 total 나오도록
 }
 
 done.addEventListener("click", handler);
