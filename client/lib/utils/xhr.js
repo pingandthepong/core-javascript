@@ -9,7 +9,7 @@
 */
 
 // xhr Data 함수 만들기 method, url
-function xhrData({
+export function xhrData({
   url = "",
   method = "GET",
   body = null,
@@ -27,7 +27,7 @@ function xhrData({
   // 비동기 통신 오픈
   xhr.open(method, url);
 
-  console.log(Object.entries(headers));
+  // console.log(Object.entries(headers));
 
   // Object.entries => Static Method. 객체의 프로퍼티를 [키, 값] 으로 반환
   // Object.entries(headers).forEach(([key, value]) => {
@@ -103,35 +103,35 @@ xhrData.delete = (url, body, onSuccess, onFail) => {
   });
 };
 
-xhrData.get(
-  "https://jsonplaceholder.typicode.com/users",
-  (result) => {
-    console.log(result);
-  },
-  (error) => {
-    console.log(error);
-  }
-);
+// xhrData.get(
+//   "https://jsonplaceholder.typicode.com/users",
+//   (result) => {
+//     console.log(result);
+//   },
+//   (error) => {
+//     console.log(error);
+//   }
+// );
 
-xhrData.post(
-  "https://jsonplaceholder.typicode.com/users",
-  (result) => {
-    console.log(result);
-  },
-  (error) => {
-    console.log(error);
-  }
-);
+// xhrData.post(
+//   "https://jsonplaceholder.typicode.com/users",
+//   (result) => {
+//     console.log(result);
+//   },
+//   (error) => {
+//     console.log(error);
+//   }
+// );
 
-xhrData.delete(
-  "https://jsonplaceholder.typicode.com/users/3",
-  (res) => {
-    console.log(res);
-  },
-  (err) => {
-    console.log(err);
-  }
-);
+// xhrData.delete(
+//   "https://jsonplaceholder.typicode.com/users/3",
+//   (res) => {
+//     console.log(res);
+//   },
+//   (err) => {
+//     console.log(err);
+//   }
+// );
 
 // xhrData("POST", "https://jsonplaceholder.typicode.com/users", {
 //   name: "Ervin Howell",
