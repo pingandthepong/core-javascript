@@ -9,11 +9,28 @@
 */
 
 // xhr Data 함수 만들기 method, url
-function xhrData(method, url, body) {
+function xhrData({
+  url = "",
+  method = "GET",
+  body = null,
+  headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+}) {
+  // 객체 구조 분해 할당
+  //const { method, url, body } = options;
   const xhr = new XMLHttpRequest();
 
   // 비동기 통신 오픈
   xhr.open(method, url);
+
+  console.log(Object.entries(headers));
+
+  // Object.entries => Static Method. 객체의 프로퍼티를 [키, 값] 으로 반환
+  // Object.entries(headers).forEach(([key, value]) => {
+  //   xhr.setRequestHeader(key, value); // setRequestHeader = 키, 값 을 받아서 헤더값에 추가 , 헤더를 리퀘스트할 때 세팅하는 내장함수
+  // });
 
   xhr.addEventListener("readystatechange", () => {
     // 객체 구조 분해 할당
@@ -33,25 +50,29 @@ function xhrData(method, url, body) {
   xhr.send(JSON.stringify(body));
 }
 
-xhrData("POST", "https://jsonplaceholder.typicode.com/users", {
-  name: "Ervin Howell",
-  username: "Antonette",
-  email: "Shanna@melissa.tv",
-  address: {
-    street: "Victor Plains",
-    suite: "Suite 879",
-    city: "Wisokyburgh",
-    zipcode: "90566-7771",
-    geo: {
-      lat: "-43.9509",
-      lng: "-34.4618",
-    },
-  },
-  phone: "010-692-6593 x09125",
-  website: "anastasia.net",
-  company: {
-    name: "Deckow-Crist",
-    catchPhrase: "Proactive didactic contingency",
-    bs: "synergize scalable supply-chains",
-  },
+xhrData({
+  url: "https://jsonplaceholder.typicode.com/users",
 });
+
+// xhrData("POST", "https://jsonplaceholder.typicode.com/users", {
+//   name: "Ervin Howell",
+//   username: "Antonette",
+//   email: "Shanna@melissa.tv",
+//   address: {
+//     street: "Victor Plains",
+//     suite: "Suite 879",
+//     city: "Wisokyburgh",
+//     zipcode: "90566-7771",
+//     geo: {
+//       lat: "-43.9509",
+//       lng: "-34.4618",
+//     },
+//   },
+//   phone: "010-692-6593 x09125",
+//   website: "anastasia.net",
+//   company: {
+//     name: "Deckow-Crist",
+//     catchPhrase: "Proactive didactic contingency",
+//     bs: "synergize scalable supply-chains",
+//   },
+// });
