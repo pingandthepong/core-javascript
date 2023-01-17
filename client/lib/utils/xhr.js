@@ -14,11 +14,12 @@ function xhrData({
   method = "GET",
   body = null,
   onSuccess = null,
+  onFail = null,
   headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   },
-}) {
+} = {}) {
   // 객체 구조 분해 할당
   //const { method, url, body } = options;
   const xhr = new XMLHttpRequest();
@@ -43,7 +44,7 @@ function xhrData({
         onSuccess(JSON.parse(response));
       }
     } else {
-      console.error("통신 실패");
+      onFail("통신 실패");
     }
   });
 
@@ -51,13 +52,86 @@ function xhrData({
   xhr.send(JSON.stringify(body));
 }
 
-xhrData({
-  url: "https://jsonplaceholder.typicode.com/users",
-  // 성공했을 때 결과물 출력
-  onSuccess: (result) => {
+// xhrData({
+//   url: "https://jsonplaceholder.typicode.com/users",
+
+//   // 성공했을 때 결과물 출력
+//   onSuccess: (result) => {
+//     console.log(result);
+//   },
+
+//   // 실패했을 때 결과물 출력
+//   onFail: (err) => {
+//     console.error(err);
+//   },
+// });
+
+xhrData.get = (url, onSuccess, onFail) => {
+  xhrData({
+    url,
+    onSuccess,
+    onFail,
+  });
+};
+
+xhrData.post = (url, body, onSuccess, onFail) => {
+  xhrData({
+    method: "POST",
+    body,
+    url,
+    onSuccess,
+    onFail,
+  });
+};
+
+xhrData.put = (url, body, onSuccess, onFail) => {
+  xhrData({
+    method: "PUT",
+    body,
+    url,
+    onSuccess,
+    onFail,
+  });
+};
+
+xhrData.delete = (url, body, onSuccess, onFail) => {
+  xhrData({
+    method: "DELETE",
+    url,
+    onSuccess,
+    onFail,
+  });
+};
+
+xhrData.get(
+  "https://jsonplaceholder.typicode.com/users",
+  (result) => {
     console.log(result);
   },
-});
+  (error) => {
+    console.log(error);
+  }
+);
+
+xhrData.post(
+  "https://jsonplaceholder.typicode.com/users",
+  (result) => {
+    console.log(result);
+  },
+  (error) => {
+    console.log(error);
+  }
+);
+
+xhrData.delete(
+  "https://jsonplaceholder.typicode.com/users/3",
+  (res) => {
+    console.log(res);
+  },
+  (err) => {
+    console.log(err);
+  }
+);
 
 // xhrData("POST", "https://jsonplaceholder.typicode.com/users", {
 //   name: "Ervin Howell",
