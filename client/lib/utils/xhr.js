@@ -13,6 +13,7 @@ function xhrData({
   url = "",
   method = "GET",
   body = null,
+  onSuccess = null,
   headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -39,7 +40,7 @@ function xhrData({
     if (status >= 200 && status < 400) {
       if (readyState === 4) {
         console.log("통신 성공");
-        console.log(JSON.parse(response));
+        onSuccess(JSON.parse(response));
       }
     } else {
       console.error("통신 실패");
@@ -52,6 +53,10 @@ function xhrData({
 
 xhrData({
   url: "https://jsonplaceholder.typicode.com/users",
+  // 성공했을 때 결과물 출력
+  onSuccess: (result) => {
+    console.log(result);
+  },
 });
 
 // xhrData("POST", "https://jsonplaceholder.typicode.com/users", {
