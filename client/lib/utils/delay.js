@@ -40,11 +40,7 @@ const second = getNode(".second");
 function delayP(shouldReject = false, timeout = 1000) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (!shouldReject) {
-        resolve("성공!");
-      } else {
-        reject("실패!");
-      }
+      !shouldReject ? resolve("성공!") : reject("실패!");
     }, timeout);
   });
 }
