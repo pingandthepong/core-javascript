@@ -47,6 +47,25 @@ function delayP(timeout = 1000) {
 }
 // console.log(delayP());
 
+
+// 프라미스 체이닝 설멍 (지금은 던져주는 게 없어서 undefined 나올거임)
+// then에서 return을 던져줘야 함!
+// 귀찮나? 그래서 나중에 async await이 나옴..
 delayP().then((res) => {
+  console.log(res);
+});
+.then((res) => {
+  console.log(res);
+});
+.then((res) => {
+  console.log(res);
+});
+.then((res) => {
+  console.log(res);
+});
+.then((res) => {
+  console.log(res);
+});
+.then((res) => {
   console.log(res);
 });
