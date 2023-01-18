@@ -36,21 +36,31 @@ const second = getNode(".second");
 //     second.style.left = "0px";
 //   });
 
+// 매번 함수 호출시 매개변수 자리마다 맞추기 힘드니까, 객체를 생성해
+const defaultOptions = {
+  shouldReject: false,
+  timeout: 1000,
+  data: "성공",
+  errorMessage: "알 수 없는 오류가 발생했습니다.",
+};
+
 // Promise 로 약속 -> Then 으로 받아서 사용
-function delayP(
-  shouldReject = false,
-  timeout = 1000,
-  data = "성공했습니다.",
-  errorMessage = "알 수 없는 오류가 발생했습니다."
-) {
+// 매개변수를 option객체로 받아오는 것~!
+function delayP(options = {}) {
+  const { shouldReject, data, errorMessage, timeout } = options;
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       !shouldReject ? resolve(data) : reject(errorMessage);
     }, timeout);
   });
 }
-// true, false를 던져서 성패 나타내기
-delayP(false, 1000, "진짜 성공", "오류가 발생했다!").then((res) => {
+// 객체로 받아와서 쓰면 순서 상관없이 쓰면 됨!!
+delayP({
+  shouldReject: true,
+  timeout: 1500,
+  data: "안녕",
+  errorMessage: "잘가",
+}).then((res) => {
   console.log(res);
 });
 
