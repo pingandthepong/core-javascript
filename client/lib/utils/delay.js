@@ -47,7 +47,7 @@ const defaultOptions = {
 
 // Promise 로 약속 -> Then 으로 받아서 사용
 // 매개변수를 option객체로 받아오는 것~!
-function delayP(options = {}) {
+export function delayP(options = {}) {
   let config = { ...defaultOptions }; // Object.assign({})과 같음
 
   if (isNumber(options)) {
@@ -67,9 +67,10 @@ function delayP(options = {}) {
   });
 }
 
-delayP(3000).then((res) => {
-  console.log(res);
-});
+// delayP(3000).then((res) => {
+//   console.log(res);
+// });
+// delayP 호출시 Promise가 반환된다는 게 중요한 포인트임
 
 // 프라미스 체이닝 설멍 (지금은 던져주는 게 없어서 undefined 나올거임)
 // then에서 return을 던져줘야 함!
