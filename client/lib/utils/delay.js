@@ -110,8 +110,8 @@ async function 라면끓이기() {
     await delayP();
     first.style.transform = "rotate(360deg)";
 
-    throw new Error("계란 껍질이 들어가버렸다!");
-
+    // throw new Error("계란 껍질이 들어가버렸다!");
+    // 아래 빨간 줄은, 에런데 뭘 써놨냐~ 이런 뜻
     await delayP();
     console.log("그릇에 담기");
   } catch (err) {
@@ -119,4 +119,4 @@ async function 라면끓이기() {
   }
 }
 
-라면끓이기();
+// 라면끓이기();
