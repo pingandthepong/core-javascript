@@ -47,7 +47,11 @@ const defaultOptions = {
 // Promise 로 약속 -> Then 으로 받아서 사용
 // 매개변수를 option객체로 받아오는 것~!
 function delayP(options = {}) {
-  const { shouldReject, data, errorMessage, timeout } = options;
+  let config = { ...defaultOptions }; // Object.assign({})과 같음
+
+  // 객체 합성 mixin
+  config = { ...config, ...options }; // 엄청 많이 쓰는거라 잘 알아두기
+
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       !shouldReject ? resolve(data) : reject(errorMessage);
@@ -56,10 +60,7 @@ function delayP(options = {}) {
 }
 // 객체로 받아와서 쓰면 순서 상관없이 쓰면 됨!!
 delayP({
-  shouldReject: true,
-  timeout: 1500,
   data: "안녕",
-  errorMessage: "잘가",
 }).then((res) => {
   console.log(res);
 });
