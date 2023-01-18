@@ -52,6 +52,8 @@ function delayP(options = {}) {
   // 객체 합성 mixin
   config = { ...config, ...options }; // 엄청 많이 쓰는거라 잘 알아두기
 
+  const { shouldReject, data, errorMessage, timeout } = config;
+
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       !shouldReject ? resolve(data) : reject(errorMessage);
