@@ -37,23 +37,27 @@ const second = getNode(".second");
 //   });
 
 // Promise 로 약속 -> Then 으로 받아서 사용
-function delayP(timeout = 1000) {
+function delayP(shouldReject = false, timeout = 1000) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      // resolve("성공!");
-      reject("실패!");
+      if (!shouldReject) {
+        resolve("성공!");
+      } else {
+        reject("실패!");
+      }
     }, timeout);
   });
 }
-// console.log(delayP());
+// true, false를 던져서 성패 나타내기
+delayP(false);
 
 // 프라미스 체이닝 설멍 (지금은 던져주는 게 없어서 undefined 나올거임)
 // then에서 return을 던져줘야 함!
 // 귀찮나? 그래서 나중에 async await이 나옴..
-delayP()
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// delayP()
+//   .then((res) => {
+//     console.log(res);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
