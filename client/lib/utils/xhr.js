@@ -9,6 +9,7 @@
 */
 
 // xhr Data 함수 만들기 method, url
+// 콜백 방식으로 만듦. 이제 Promise 방식으로 바꿔볼거임
 export function xhrData({
   url = "",
   method = "GET",
