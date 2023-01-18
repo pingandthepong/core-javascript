@@ -186,7 +186,7 @@ export function xhrPromise(options = {}) {
   if (!url) TypeError("서버와 통신할 url 인자는 반드시 필요합니다.");
 
   xhr.open(method, url);
-  xhr.send(body ? JSON.stringify(body) : null);
+  //xhr.send(body ? JSON.stringify(body) : null);
 
   // return은 함수를 종료시키기에, send를 위로 올림
   return new Promise((resolve, reject) => {
