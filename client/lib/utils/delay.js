@@ -37,15 +37,22 @@ const second = getNode(".second");
 //   });
 
 // Promise 로 약속 -> Then 으로 받아서 사용
-function delayP(shouldReject = false, timeout = 1000) {
+function delayP(
+  shouldReject = false,
+  timeout = 1000,
+  data = "성공했습니다.",
+  errorMessage = "알 수 없는 오류가 발생했습니다."
+) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      !shouldReject ? resolve("성공!") : reject("실패!");
+      !shouldReject ? resolve(data) : reject(errorMessage);
     }, timeout);
   });
 }
 // true, false를 던져서 성패 나타내기
-delayP(false);
+delayP(false, 1000, "진짜 성공", "오류가 발생했다!").then((res) => {
+  console.log(res);
+});
 
 // 프라미스 체이닝 설멍 (지금은 던져주는 게 없어서 undefined 나올거임)
 // then에서 return을 던져줘야 함!
