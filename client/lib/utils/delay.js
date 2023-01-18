@@ -1,4 +1,5 @@
 import { getNode } from "../dom/getNode.js";
+import { isNumber, isObject } from "./typeOf.js";
 
 const first = getNode(".first");
 const second = getNode(".second");
@@ -49,8 +50,13 @@ const defaultOptions = {
 function delayP(options = {}) {
   let config = { ...defaultOptions }; // Object.assign({})과 같음
 
-  // 객체 합성 mixin
-  config = { ...config, ...options }; // 엄청 많이 쓰는거라 잘 알아두기
+  if (isNumber(options)) {
+    config.timeout = options;
+  }
+
+  if (isObject(options)) {
+    config = { ...config, ...options }; // 객체 합성 mixin
+  }
 
   const { shouldReject, data, errorMessage, timeout } = config;
 
@@ -60,10 +66,8 @@ function delayP(options = {}) {
     }, timeout);
   });
 }
-// 객체로 받아와서 쓰면 순서 상관없이 쓰면 됨!!
-delayP({
-  data: "안녕",
-}).then((res) => {
+
+delayP(3000).then((res) => {
   console.log(res);
 });
 
