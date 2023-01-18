@@ -7,6 +7,7 @@
   4:complete // 완료
 
 */
+import { typeError } from "../error/typeError.js";
 
 // xhr Data 함수 만들기 method, url
 // 콜백 방식으로 만듦. 이제 Promise 방식으로 바꿔볼거임
@@ -156,3 +157,59 @@ xhrData.delete = (url, body, onSuccess, onFail) => {
 //     bs: "synergize scalable supply-chains",
 //   },
 // });
+
+/* -------------------------------------------------------------------------- */
+/*                                 promise API                                */
+/* -------------------------------------------------------------------------- */
+
+const defaultOptions = {
+  url: "",
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+  body: null,
+};
+
+export function xhrPromise(options = {}) {
+  const xhr = new XMLHttpRequest();
+
+  // 합성과 동시에 구조 분해 할당
+  const { method, url, body, headers } = Object.assign(
+    {},
+    defaultOptions,
+    options
+  );
+
+  // 에러 처리
+  if (!url) TypeError("서버와 통신할 url 인자는 반드시 필요합니다.");
+
+  xhr.open(method, url);
+  xhr.send(body ? JSON.stringify(body) : null);
+
+  // return은 함수를 종료시키기에, send를 위로 올림
+  return new Promise((resolve, reject) => {
+    xhr.addEventListener("readystatechange", () => {
+      const { status, readyState, response } = xhr;
+
+      if (status >= 200 && status < 400) {
+        if (readyState === 4) {
+          resolve(JSON.parse(response));
+        }
+      } else {
+        reject("에러입니다.");
+      }
+    });
+  });
+}
+
+xhrPromise({
+  url: "https://jsonplaceholder.typicode.com/users/1",
+})
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
