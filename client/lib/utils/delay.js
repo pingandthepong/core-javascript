@@ -19,3 +19,14 @@ delay(() => {
 });
 // 많아지면 보기 힘듦. 그래서 프라미스가 필요. 가독성있게 만들 수 있음!
 // 프라미스 사용 이용 = 콜백 가독성을 위해
+
+// Promise 로 약속 -> Then 으로 받아서 사용
+function delayP(timeout = 1000) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("성공!");
+      // reject("실패!");
+    }, timeout);
+  });
+}
+console.log(delayP());
