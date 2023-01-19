@@ -1,4 +1,4 @@
-import { insertLast, xhrData } from "./lib/index.js";
+import { insertLast, xhrData, xhrPromise, tiger, delayP } from "./lib/index.js";
 
 // xhrData.get(
 //   "https://jsonplaceholder.typicode.com/users/1",
@@ -9,3 +9,13 @@ import { insertLast, xhrData } from "./lib/index.js";
 //     insertLast("body", "데이터 로딩에 실패했습니다.");
 //   }
 // );
+
+async function render() {
+  await delayP(2000); // 2초 뒤에 Promise 반환
+  let response = await tiger.get(
+    "https://jsonplaceholder.typicode.com/users/1"
+  );
+  console.log(response.data);
+}
+
+render();
