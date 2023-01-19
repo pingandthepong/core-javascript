@@ -67,7 +67,6 @@ tiger.delete = (url, options) => {
   return tiger({
     method: "DELETE",
     url,
-    body: JSON.stringify(body),
     ...options,
   });
 };
